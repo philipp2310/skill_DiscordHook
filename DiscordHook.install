@@ -1,0 +1,14 @@
+{
+	"name": "DiscordHook",
+	"version": 0.01,
+	"author": "philipp2310",
+	"maintainers": ["maxbachmann", "Psychokiller1888"],
+	"desc": "Bring Alice to Discord!",
+	"aliceMinVersion": 0.13,
+	"systemRequirements": [],
+	"pipRequirements": ["discord.py"],
+	"conditions": {
+		"lang": ["en", "de", "fr"],
+		"online": true
+	}
+}
