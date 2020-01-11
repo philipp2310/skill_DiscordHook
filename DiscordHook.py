@@ -20,6 +20,7 @@ class DiscordHook(AliceSkill):
 	"""
 
 	def __init__(self):
+		super().__init__()
 		self.loop = asyncio.get_event_loop()
 		self.client = discord.Client(loop=self.loop)
 		self.client.event(self.on_message)
@@ -27,7 +28,6 @@ class DiscordHook(AliceSkill):
 		self.allowedChans = self.getConfig("allowedSiteIDs").split(",")
 
 
-		super().__init__()
 
 	def onStart(self):
 		super().onStart()
