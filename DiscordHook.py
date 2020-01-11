@@ -29,9 +29,8 @@ class DiscordHook(AliceSkill):
 
 	def onStart(self):
 		super().onStart()
-		#TODO get config for Bot Token
 		#TODO get more logic thread names
-		self.ThreadManager.newThread(name='otto', target=self.client.run, args={'XXX',})
+		self.ThreadManager.newThread(name='otto', target=self.client.run, args={self.getConfig("botToken"),})
 
 	def onStop(self):
 		self.ThreadManager.terminateThread(name='otto')

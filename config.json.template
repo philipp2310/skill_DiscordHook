@@ -1,0 +1,7 @@
+{
+  "botToken": {
+		"defaultValue": "",
+		"dataType": "string",
+		"description": "Discord Token of the Bot"
+	}
+}
