@@ -24,7 +24,7 @@ class DiscordHook(AliceSkill):
 		self.client = discord.Client(loop=self.loop)
 		self.client.event(self.on_message)
 		self.client.event(self.on_ready)
-		self.allowedChans = self.getCofig("allowedSiteIDs").split(",")
+		self.allowedChans = self.getConfig("allowedSiteIDs").split(",")
 
 
 		super().__init__()
