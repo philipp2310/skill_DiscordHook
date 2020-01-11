@@ -24,16 +24,17 @@ class DiscordHook(AliceSkill):
 		self.client = discord.Client(loop=self.loop)
 		self.client.event(self.on_message)
 		self.client.event(self.on_ready)
+		self.allowedChans = self.getCofig("allowedSiteIDs").split(",")
+
 
 		super().__init__()
 
 	def onStart(self):
 		super().onStart()
-		#TODO get more logic thread names
-		self.ThreadManager.newThread(name='otto', target=self.client.run, args={self.getConfig("botToken"),})
+		self.ThreadManager.newThread(name='DiscordHook', target=self.client.run, args={self.getConfig("botToken"),})
 
 	def onStop(self):
-		self.ThreadManager.terminateThread(name='otto')
+		self.ThreadManager.terminateThread(name='DiscordHook')
 		super().onStop()
 
 
@@ -59,9 +60,7 @@ class DiscordHook(AliceSkill):
 
 		if self.client.user.mentioned_in(message):
 			async with message.channel.typing():
-				#TODO make allowed categorys configurable
-				#TODO maybe make only customized channels available as well: prevent Discord user to add channel and hear from new rooms!
-				if message.channel.category.name == 'Home':
+				if message.channel.name in self.allowedChans:
 					try:
 						siteId = message.channel.name
 						sessionId = str(uuid.uuid4())

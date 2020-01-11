@@ -3,5 +3,10 @@
 		"defaultValue": "",
 		"dataType": "string",
 		"description": "Discord Token of the Bot"
+	},
+	"allowedSiteIDs": {
+		"defaultValue": "default,test",
+		"dataType": "string",
+		"description": "Comma-seperated siteIDs, that Alice will answer in Discord"
 	}
 }
