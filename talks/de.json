@@ -1,5 +1,10 @@
 {
 	"authFailed": [
 		"Authentifizierung fehlgeschlagen. Bitte prüfe deine Login Daten in den Einstellungen"
+	],
+	"chanForbidden": [
+		"Psst... Nicht hier.. :shushing_face:",
+		":no_entry: Hier darf ich nicht mit dir reden! :no_entry:",
+		":disappointed_relieved: Entschuldigung, nicht hier! :point_down:"
 	]
 }

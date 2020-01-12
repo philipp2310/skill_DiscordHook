@@ -64,23 +64,21 @@ class DiscordHook(AliceSkill):
 					try:
 						siteId = message.channel.name
 						sessionId = str(uuid.uuid4())
-						newmessage = MQTTMessage()
-						newmessage.payload = json.dumps({'sessionId': sessionId, 'siteId': siteId})
-						session = self.DialogSessionManager.addSession(sessionId=sessionId, message=newmessage)
+						newMessage = MQTTMessage()
+						newMessage.payload = json.dumps({'sessionId': sessionId, 'siteId': siteId})
+						session = self.DialogSessionManager.addSession(sessionId=sessionId, message=newMessage)
 						session.isAPIGenerated = True
 						self.MqttManager.publish(topic=constants.TOPIC_NLU_QUERY, payload={ 'input'	: message.content.replace("<@!" + str(self.client.user.id)+">", ""), 'sessionId': session.sessionId })
 					except Exception as e:
 						self.logError(f'Failed processing: {e}')
 				else:
-					await message.channel.send("Hier darf ich nicht mit dir reden!")
+					await message.channel.send(self.randomTalk("chanForbidden"))
 
 
 	# Alice Voice event!
 	def onSay(self, session: DialogSession):
-		chan = self.getChanByName(session.siteId)
-		if chan:
-			coro = chan.send(session.payload['text'])
-			asyncio.run_coroutine_threadsafe(coro, self.loop)
-		else:
-			self.logInfo("Not relevant")
-
+		if session.siteId in self.allowedChans:
+			chan = self.getChanByName(session.siteId)
+			if chan:
+				coro = chan.send(session.payload['text'])
+				asyncio.run_coroutine_threadsafe(coro, self.loop)

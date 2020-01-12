@@ -1,0 +1,10 @@
+{
+	"authFailed": [
+		"Authentification failed. Please check the Token in your settings."
+	],
+	"chanForbidden": [
+		"Psst... Not here.. :shushing_face:",
+		":no_entry: I'm not allowed to talk to you here! :no_entry:",
+		":disappointed_relieved: Sorry, not here!:point_down:"
+	]
+}
