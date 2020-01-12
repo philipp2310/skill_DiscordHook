@@ -1,10 +1,5 @@
-from typing import Tuple
-
-from core.ProjectAliceExceptions import SkillStartingFailed
-from core.base.model.Intent import Intent
 from core.base.model.AliceSkill import AliceSkill
 from core.dialog.model.DialogSession import DialogSession
-from core.util.Decorators import AnyExcept, Online
 from core.commons import constants
 import discord
 import asyncio
@@ -31,7 +26,8 @@ class DiscordHook(AliceSkill):
 
 	def onStart(self):
 		super().onStart()
-		self.ThreadManager.newThread(name='DiscordHook', target=self.client.run, args={self.getConfig("botToken"),})
+		self.loop.create_task(self.client.start(self.getConfig("botToken")))
+		self.ThreadManager.newThread(name='DiscordHook', target=self.loop.run_forever())
 
 	def onStop(self):
 		self.ThreadManager.terminateThread(name='DiscordHook')
