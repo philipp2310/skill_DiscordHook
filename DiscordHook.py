@@ -27,7 +27,7 @@ class DiscordHook(AliceSkill):
 	def onStart(self):
 		super().onStart()
 		self.loop.create_task(self.client.start(self.getConfig("botToken")))
-		self.ThreadManager.newThread(name='DiscordHook', target=self.loop.run_forever())
+		self.ThreadManager.newThread(name='DiscordHook', target=self.loop.run_forever)
 
 	def onStop(self):
 		self.ThreadManager.terminateThread(name='DiscordHook')
